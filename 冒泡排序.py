@@ -22,8 +22,8 @@ def Bubble_sort(array):
 turn_list()
 length = len(list_1)
 number = 0
+sorted_list = 0
 while number <= length-1:
     sorted_list = Bubble_sort(list_1)
     number += 1
-else:
-    print(sorted_list)
+print(sorted_list)

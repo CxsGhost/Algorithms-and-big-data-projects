@@ -30,3 +30,4 @@ ana = list(filter(None, map(Find, number)))
 for i in sorted(ana):
     print(i)
 
+

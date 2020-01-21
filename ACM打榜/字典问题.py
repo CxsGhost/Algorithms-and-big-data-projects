@@ -19,7 +19,7 @@ Dict()
 import string
 
 
-def combine(s):
+def wash_data(s):
     for k in string.punctuation:
         s = s.replace(k, " ")
     for n in range(10):
@@ -29,18 +29,16 @@ def combine(s):
     return set_1
 
 
-list_str = []
-set_all = set()
+list_str = []  # 用于收集字符串
+set_all = set()  # 先建立里一个空集合，后续合并时使用
 while True:
     try:
         str_ = input()
         list_str.append(str_)
     except EOFError:
         break
-list_set = map(combine, list_str)
+list_set = map(wash_data, list_str)
 for i in list_set:
     set_all = set_all | i
-list_dic = list(set_all)
-list_dic.sort()
-for j in list_dic:
+for j in sorted(set_all):
     print(j)

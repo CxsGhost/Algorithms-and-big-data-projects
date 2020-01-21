@@ -6,21 +6,21 @@ import matplotlib.pyplot as plt
 class Perceptron:
     def __init__(self):
         self.learn_rate = 1
-        self.t_data = None
-        self.t_data_c = None
         self.w_b = np.array([[0],
                             [0],
-                            [0]])
+                            [0]])  # 把三个参数放在一个矩阵中（w1, w2, b)
+        self.t_data = None
+        self.t_data_c = None  # 因为要三个参数一起更新，观察书上的公式，其实就是y乘x1,x2,1,然后加到参数矩阵就行了所以又建立一个y值全是1的矩阵
 
     def collect_data(self):
         collect_1 = []
         collect_2 = []
         while True:
-            try:
+            try:  # 利用异常处理结束输入，别的没想到啥好办法。。
                 data = map(int, input("输入数据x1 x2 y（空格隔开)\
                 输入任意字母敲回车以结束：").split(' '))
                 data = list(data)
-                collect_1.append(copy.copy(data))
+                collect_1.append(copy.copy(data))  # 测试发现，下一行的更改会影响上一行，两个指向的变量地址一样，所以得copy一下
                 data[2] = 1
                 collect_2.append(data)
             except ValueError:
@@ -31,11 +31,11 @@ class Perceptron:
 
     def gradient_descent(self):
         print("开始迭代...")
-        while True:
+        while True:  # 每次都统计误分类的点数，直到没有为止，跳出循环，迭代结束
             mistake = 0
-            for line, line_c in zip(self.t_data, self.t_data_c):
+            for line, line_c in zip(self.t_data, self.t_data_c):  # 一个用来判断是否误分类，一个用来更新参数矩阵
                 if line[2] * np.dot(line_c, self.w_b)[0] <= 0:
-                    line_c = line_c * line[2]
+                    line_c = line_c * line[2]  # 更新方法对应着上面第二条注释
                     mistake += 1
                     self.w_b[0][0] += line_c[0]
                     self.w_b[1][0] += line_c[1]
@@ -44,11 +44,11 @@ class Perceptron:
                 break
         print("迭代完成！")
 
-    def visualize(self):
+    def visualize(self):  # 以下绘图中的y并不是之前的那个y,其实是所谓的x_2。。
         plt.figure(figsize=(8, 4))
         x = 0
         y = 0
-        if not self.w_b[1][0]:
+        if not self.w_b[1][0]:  # 测试中发现，出现了x_2的系数为0的情况，这样的话绘图时就相当于除数为0了
             x = -1 * self.w_b[2][0] / self.w_b[0][0]
             plt.axvline(x, color='g')
         else:

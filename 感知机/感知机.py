@@ -35,7 +35,7 @@ class Perceptron:
             mistake = 0
             for line, line_c in zip(self.t_data, self.t_data_c):  # 一个用来判断是否误分类，一个用来更新参数矩阵
                 if line[2] * np.dot(line_c, self.w_b)[0] <= 0:
-                    line_c = line_c * line[2]  # 更新方法对应着上面第二条注释
+                    line_c = line_c * line[2] * self.learn_rate  # 更新方法对应着上面第二条注释
                     mistake += 1
                     self.w_b[0][0] += line_c[0]
                     self.w_b[1][0] += line_c[1]
@@ -67,7 +67,7 @@ class Perceptron:
         plt.show()
 
 
-sss = Perceptron()
-sss.collect_data()
-sss.gradient_descent()
-sss.visualize()
+p = Perceptron()
+p.collect_data()
+p.gradient_descent()
+p.visualize()

@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 class Perceptron:
     def __init__(self):
-        self.learn_rate = 0.5
+        self.learn_rate = 0.5  # 随意设置
         self.w_b = np.array([[0],
                             [0],
                             [0]], dtype='float32')  # 把三个参数放在一个矩阵中（w1, w2, b）
@@ -52,7 +52,7 @@ class Perceptron:
             print('第{}次迭代\n参数w：{}'.format(number, self.w_b))
         print('-----------------')
         print("迭代完成！")
-        print('学习率：{}，迭代次数：{}'.format(self.learn_rate, number))
+        print('本次学习率：{}，迭代次数：{}'.format(self.learn_rate, number))
 
     def visualize(self):  # 以下绘图中的y并不是之前的那个y,其实是所谓的x_2。。
         plt.figure(figsize=(8, 4))

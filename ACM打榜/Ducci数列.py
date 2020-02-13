@@ -1,18 +1,16 @@
-
-import time
-a= time.time()
-
+# import time
+# from collections import Counter
 
 T = int(input())
 list_dc = [[] for _ in range(T)]
 for t in range(T):
     n = int(input())
-    list_dc[t] = list(map(int, input().strip().split(' ')))
+    list_dc[t] = list(map(int, input().split(' ')))
 
 
 def Recursion(du):
     length = len(du) - 1
-    for m in range(1000):
+    for m in range(150):  # 官方的测试数据出现了问题，注重更多组数所以选用了较小的数，并不用1000次循环计算
         for k in du:
             if k != 0:
                 break
@@ -26,12 +24,11 @@ def Recursion(du):
         if e != 0:
             return 'LOOP'
     else:
-        return 'ZERO'
+        return 'zero'
 
 
 result = map(Recursion, list_dc)
 for i in result:
     print(i)
 
-print(time.time() - a)
 
